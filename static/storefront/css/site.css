@@ -1,8 +1,8 @@
 :root {
     --bg: #f7f1e8;
     --bg-deep: #efe5d5;
-    --surface: rgba(255, 248, 238, 0.72);
-    --surface-strong: rgba(255, 252, 247, 0.92);
+    --surface: rgba(255, 248, 238, 0.82);
+    --surface-strong: rgba(255, 252, 247, 0.94);
     --ink: #131313;
     --muted: #5d5a55;
     --accent: #ff6b3d;
@@ -58,43 +58,14 @@ a {
 }
 
 .hero,
-.section-block {
+.section-block,
+.viewer-showcase {
     padding: 0 5vw;
 }
 
-.promo-strip {
-    overflow: hidden;
-    background: #0f0f10;
-    color: #f7f0e8;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.promo-track,
-.brand-track {
-    display: flex;
-    gap: 2.5rem;
-    width: max-content;
-}
-
-.promo-track {
-    padding: 0.8rem 0;
-    font-size: 0.82rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    animation: ticker 26s linear infinite;
-}
-
-.promo-track span::after,
-.brand-track span::after {
-    content: "•";
-    margin-left: 2.5rem;
-    opacity: 0.7;
-}
-
 .hero {
-    padding-top: 1.2rem;
-    padding-bottom: 4.2rem;
+    padding-top: 1.5rem;
+    padding-bottom: 4rem;
 }
 
 .topbar {
@@ -103,27 +74,26 @@ a {
     justify-content: space-between;
     gap: 1rem;
     padding: 0.9rem 1.1rem;
+    border: 1px solid var(--line);
     border-radius: 999px;
+    background: rgba(255, 250, 243, 0.78);
+    backdrop-filter: blur(18px);
     position: sticky;
     top: 1rem;
     z-index: 15;
 }
 
-.topbar-hero {
-    background: rgba(12, 12, 12, 0.62);
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    backdrop-filter: blur(18px);
-    color: #fff;
-}
-
 .brand-mark,
 .hero-copy h1,
 .section-heading h2,
+.viewer-header h2,
+.viewer-meta-panel h3,
 .tab-panel h3,
 .collection-copy h3,
 .edit-card h3,
 .spotlight-copy h3,
-.hero-entry-copy h2 {
+.feature-overlay h2,
+.floating-note strong {
     font-family: "Syne", sans-serif;
 }
 
@@ -135,14 +105,14 @@ a {
 .topbar-links {
     display: flex;
     flex-wrap: wrap;
-    gap: 1.15rem;
-    font-size: 0.92rem;
+    gap: 1.2rem;
+    color: var(--muted);
+    font-size: 0.95rem;
 }
 
 .topbar-links a {
     position: relative;
-    opacity: 0.88;
-    transition: opacity 180ms ease;
+    transition: color 180ms ease;
 }
 
 .topbar-links a::after {
@@ -159,79 +129,24 @@ a {
 }
 
 .topbar-links a:hover {
-    opacity: 1;
+    color: var(--ink);
 }
 
 .topbar-links a:hover::after {
     transform: scaleX(1);
 }
 
-.hero-stage {
+.hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr);
+    gap: 2.5rem;
+    align-items: center;
+    margin-top: 3rem;
+}
+
+.hero-copy-main {
     position: relative;
-    margin-top: 1rem;
-    border-radius: 2rem;
-    overflow: hidden;
-    background: #0e0f11;
-    box-shadow: var(--shadow);
-}
-
-.hero-slider {
-    position: relative;
-    min-height: 76vh;
-}
-
-.hero-slide {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 500ms ease;
-}
-
-.hero-slide.active {
-    opacity: 1;
-    pointer-events: auto;
-}
-
-.hero-slide img {
-    height: 100%;
-    object-fit: cover;
-    filter: saturate(1.02);
-}
-
-.hero-tone-ember,
-.hero-tone-night,
-.hero-tone-aqua {
-    background: #161616;
-}
-
-.hero-tone-ember {
-    background: linear-gradient(140deg, #4b160d 0%, #211514 100%);
-}
-
-.hero-tone-night {
-    background: linear-gradient(140deg, #0f1017 0%, #1d2738 100%);
-}
-
-.hero-tone-aqua {
-    background: linear-gradient(140deg, #0b2020 0%, #004f54 100%);
-}
-
-.hero-overlay {
-    position: absolute;
-    inset: 0;
-    background:
-        linear-gradient(90deg, rgba(8, 8, 10, 0.82) 0%, rgba(8, 8, 10, 0.52) 38%, rgba(8, 8, 10, 0.18) 68%, rgba(8, 8, 10, 0.52) 100%),
-        linear-gradient(180deg, rgba(8, 8, 10, 0.1), rgba(8, 8, 10, 0.5));
-}
-
-.hero-copy {
-    position: absolute;
-    left: 4.2rem;
-    bottom: 3.2rem;
-    z-index: 2;
-    width: min(760px, calc(100% - 8rem));
-    color: #fff;
+    z-index: 1;
 }
 
 .eyebrow {
@@ -244,34 +159,38 @@ a {
 }
 
 .hero-copy h1,
-.section-heading h2 {
+.section-heading h2,
+.viewer-header h2 {
     margin: 0;
     line-height: 0.95;
 }
 
 .hero-copy h1 {
     max-width: 11ch;
-    font-size: clamp(3.2rem, 6vw, 6.5rem);
+    font-size: clamp(3rem, 5vw, 5.9rem);
 }
 
 .hero-text,
 .section-heading p,
+.viewer-intro,
+.viewer-panel p,
 .tab-panel p,
 .collection-copy p,
 .edit-card p,
 .catalog-summary p,
 .spotlight-copy p,
 .spotlight-note p,
-.hero-entry-copy p,
-.hero-inline-stats span {
+.hero-stats p,
+.feature-overlay span,
+.floating-note p {
+    color: var(--muted);
     line-height: 1.65;
     font-size: 1rem;
 }
 
 .hero-text {
-    max-width: 54ch;
-    margin: 1.1rem 0 0;
-    color: rgba(255, 255, 255, 0.82);
+    max-width: 58ch;
+    margin: 1.25rem 0 0;
 }
 
 .hero-actions,
@@ -290,14 +209,13 @@ a {
 
 .button,
 .mini-button,
-.hero-arrow,
-.hero-dot {
+.viewer-option {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     border-radius: 999px;
     font-weight: 700;
-    transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease, color 180ms ease, border-color 180ms ease, opacity 180ms ease;
+    transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease, color 180ms ease, border-color 180ms ease;
 }
 
 .button {
@@ -311,27 +229,28 @@ a {
     font-size: 0.88rem;
 }
 
-.hero-arrow,
-.hero-dot {
+.viewer-option {
+    min-height: 2.8rem;
+    padding: 0.65rem 1rem;
     border: 1px solid rgba(255, 255, 255, 0.18);
     background: rgba(255, 255, 255, 0.08);
     color: #fff;
+    cursor: pointer;
 }
 
 .button:hover,
 .mini-button:hover,
 .tab-button:hover,
 .shop-pill-row a:hover,
-.hero-arrow:hover,
-.hero-dot:hover {
+.viewer-option:hover {
     transform: translateY(-2px);
 }
 
 .button.primary,
 .mini-button.dark {
-    background: #fff;
-    color: #101012;
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.24);
+    background: var(--ink);
+    color: #fff;
+    box-shadow: var(--shadow);
 }
 
 .button.secondary,
@@ -341,9 +260,8 @@ a {
 }
 
 .button.ghost {
-    border: 1px dashed rgba(255, 255, 255, 0.34);
-    background: rgba(255, 255, 255, 0.08);
-    color: #fff;
+    border: 1px dashed var(--line-strong);
+    background: rgba(255, 255, 255, 0.16);
 }
 
 .button.compact {
@@ -355,8 +273,7 @@ a {
 .shop-pill-row,
 .spotlight-tags,
 .chip-row,
-.hero-dots,
-.hero-inline-stats {
+.viewer-chip-row {
     display: flex;
     flex-wrap: wrap;
     gap: 0.7rem;
@@ -371,7 +288,9 @@ a {
 .spotlight-tags span,
 .chip-row span,
 .edit-badge,
-.collection-badge {
+.collection-badge,
+.viewer-panel span,
+.viewer-chip-row span {
     display: inline-flex;
     align-items: center;
     padding: 0.45rem 0.75rem;
@@ -382,142 +301,295 @@ a {
     font-weight: 700;
 }
 
-.hero-pills span {
-    background: rgba(255, 255, 255, 0.12);
-    border-color: rgba(255, 255, 255, 0.14);
-    color: #fff;
-}
-
-.hero-inline-stats {
-    gap: 1rem;
-    margin-top: 1.3rem;
-}
-
-.hero-inline-stats div {
-    min-width: 150px;
-    padding: 0.85rem 1rem;
-    border-radius: 1rem;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.hero-inline-stats strong {
-    display: block;
-    margin-bottom: 0.2rem;
-    font-family: "Syne", sans-serif;
-    font-size: 1.2rem;
-}
-
-.hero-inline-stats span {
-    color: rgba(255, 255, 255, 0.78);
-}
-
-.hero-controls {
-    position: absolute;
-    right: 2rem;
-    bottom: 2rem;
-    z-index: 3;
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-}
-
-.hero-arrow {
-    min-height: 2.9rem;
-    min-width: 5.5rem;
-    padding: 0.7rem 1rem;
-    cursor: pointer;
-}
-
-.hero-dots {
-    align-items: center;
-}
-
-.hero-dot {
-    min-height: 2.9rem;
-    min-width: 3.2rem;
-    padding: 0.6rem 0.8rem;
-    cursor: pointer;
-    opacity: 0.72;
-}
-
-.hero-dot.active {
-    background: #fff;
-    color: #121212;
-    opacity: 1;
-}
-
-.hero-entry-grid {
+.hero-stats {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1rem;
-    margin-top: 1rem;
+    margin-top: 2rem;
 }
 
-.hero-entry {
+.hero-stats div {
+    padding: 1rem;
+    border-radius: 1.1rem;
+    background: rgba(255, 255, 255, 0.62);
+    border: 1px solid rgba(19, 19, 19, 0.08);
+    box-shadow: var(--card-shadow);
+    animation: float-card 6s ease-in-out infinite;
+}
+
+.hero-stats div:nth-child(2) {
+    animation-delay: 0.8s;
+}
+
+.hero-stats div:nth-child(3) {
+    animation-delay: 1.6s;
+}
+
+.hero-stats span {
+    display: block;
+    font-family: "Syne", sans-serif;
+    font-size: 1.55rem;
+    font-weight: 700;
+}
+
+.hero-visual {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 0.74fr;
+    gap: 1rem;
+    min-height: 680px;
+}
+
+.feature-card,
+.collection-card,
+.spotlight-card,
+.edit-card {
+    transform-style: preserve-3d;
+    will-change: transform;
+}
+
+.feature-card {
     position: relative;
     overflow: hidden;
-    min-height: 220px;
-    border-radius: 1.5rem;
-    box-shadow: var(--card-shadow);
-    transition: transform 220ms ease, box-shadow 220ms ease;
-}
-
-.hero-entry:hover,
-.collection-card:hover,
-.edit-card:hover,
-.spotlight-card:hover {
-    transform: translateY(-4px);
+    border-radius: 1.8rem;
     box-shadow: var(--shadow);
+    background:
+        radial-gradient(circle at top left, rgba(255, 255, 255, 0.28), transparent 30%),
+        linear-gradient(160deg, rgba(19, 19, 19, 0.2), rgba(19, 19, 19, 0.7));
 }
 
-.hero-entry img {
+.feature-card img {
     height: 100%;
     object-fit: cover;
-    transition: transform 500ms ease;
+    transition: transform 520ms ease;
 }
 
-.hero-entry:hover img {
-    transform: scale(1.04);
+.feature-card:hover img,
+.collection-card:hover img,
+.spotlight-card:hover img {
+    transform: scale(1.05);
 }
 
-.hero-entry-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, rgba(10, 10, 10, 0.05), rgba(10, 10, 10, 0.72));
+.feature-orange {
+    background:
+        radial-gradient(circle at top left, rgba(255, 224, 102, 0.35), transparent 28%),
+        linear-gradient(150deg, #ff7d52 0%, #ff5e3a 55%, #5d1808 100%);
 }
 
-.hero-entry-copy {
+.feature-teal {
+    background:
+        radial-gradient(circle at top right, rgba(255, 255, 255, 0.25), transparent 26%),
+        linear-gradient(150deg, #1cd9c1 0%, #009c92 48%, #0d2731 100%);
+}
+
+.feature-primary {
+    min-height: 680px;
+}
+
+.feature-secondary {
+    margin-top: 4.5rem;
+    min-height: 430px;
+}
+
+.feature-overlay {
     position: absolute;
     inset: auto 1rem 1rem 1rem;
-    z-index: 2;
+    padding: 1rem 1.1rem;
+    border-radius: 1.1rem;
+    background: linear-gradient(180deg, rgba(18, 18, 18, 0.1), rgba(18, 18, 18, 0.72));
     color: #fff;
 }
 
-.hero-entry-copy span {
-    display: inline-flex;
-    margin-bottom: 0.45rem;
-    padding: 0.3rem 0.58rem;
+.feature-overlay p,
+.feature-overlay span {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.82);
+}
+
+.feature-overlay p {
+    text-transform: uppercase;
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+}
+
+.feature-overlay h2 {
+    margin: 0.45rem 0 0.35rem;
+    font-size: 1.7rem;
+}
+
+.floating-note {
+    position: absolute;
+    right: -1rem;
+    bottom: 2.6rem;
+    width: min(260px, 70%);
+    padding: 1.15rem;
+    border-radius: 1.2rem;
+    background: rgba(255, 248, 238, 0.92);
+    border: 1px solid rgba(19, 19, 19, 0.08);
+    backdrop-filter: blur(16px);
+    box-shadow: var(--card-shadow);
+}
+
+.floating-note span {
+    display: inline-block;
+    margin-bottom: 0.5rem;
+    padding: 0.35rem 0.6rem;
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.16);
+    background: var(--accent-3);
     font-size: 0.78rem;
     font-weight: 700;
-    backdrop-filter: blur(12px);
 }
 
-.hero-entry-copy h2 {
+.floating-note strong {
+    display: block;
+    font-size: 1.2rem;
+}
+
+.viewer-showcase {
+    padding-top: 1.5rem;
+    padding-bottom: 2rem;
+}
+
+.viewer-header {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: 2rem;
+    align-items: end;
+    margin-bottom: 1.6rem;
+}
+
+.viewer-header h2 {
+    font-size: clamp(2.2rem, 4vw, 3.8rem);
+}
+
+.viewer-intro {
     margin: 0;
-    font-size: 1.8rem;
+    max-width: 58ch;
 }
 
-.hero-entry-copy p {
-    margin: 0.35rem 0 0;
-    color: rgba(255, 255, 255, 0.82);
+.viewer-stage {
+    position: relative;
+    min-height: 820px;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at top left, rgba(255, 228, 94, 0.18), transparent 24%),
+        radial-gradient(circle at bottom right, rgba(0, 194, 168, 0.18), transparent 28%),
+        linear-gradient(155deg, #141416 4%, #221e1b 42%, #0c2021 100%);
+}
+
+.viewer-canvas,
+.viewer-canvas canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.viewer-canvas {
+    position: absolute;
+    inset: 0;
+}
+
+.viewer-panel {
+    position: absolute;
+    z-index: 2;
+    background: rgba(255, 248, 238, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    backdrop-filter: blur(16px);
+    color: #fff;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18);
+}
+
+.viewer-panel span {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.12);
+    color: #fff;
+}
+
+.viewer-panel-copy {
+    top: 2rem;
+    left: 2rem;
+    width: min(380px, calc(100% - 4rem));
+    padding: 1.35rem;
+    border-radius: 1.5rem;
+}
+
+.viewer-panel-copy strong {
+    display: block;
+    margin-top: 0.8rem;
+    font-family: "Syne", sans-serif;
+    font-size: 2rem;
+    line-height: 1;
+}
+
+.viewer-panel-copy p {
+    margin: 0.7rem 0 0;
+    color: rgba(255, 255, 255, 0.78);
+}
+
+.viewer-panel-controls {
+    right: 2rem;
+    bottom: 2rem;
+    width: min(420px, calc(100% - 4rem));
+    padding: 1.2rem;
+    border-radius: 1.5rem;
+}
+
+.viewer-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+}
+
+.viewer-option.active {
+    background: #fff;
+    border-color: #fff;
+    color: #121212;
+}
+
+.viewer-meta {
+    position: relative;
+    min-height: 160px;
+    margin-top: 1rem;
+}
+
+.viewer-meta-panel {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 260ms ease, transform 260ms ease;
+    pointer-events: none;
+}
+
+.viewer-meta-panel.active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.viewer-meta-panel h3 {
+    margin: 0 0 0.55rem;
+    font-size: 1.6rem;
+    color: #fff;
+}
+
+.viewer-meta-panel p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.78);
+}
+
+.viewer-chip-row {
+    margin-top: 1rem;
+}
+
+.viewer-chip-row span {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.12);
+    color: #fff;
 }
 
 .brand-strip {
     overflow: hidden;
-    margin-top: 0.6rem;
     border-top: 1px solid var(--line);
     border-bottom: 1px solid var(--line);
     background: rgba(19, 19, 19, 0.96);
@@ -525,14 +597,23 @@ a {
 }
 
 .brand-track {
+    display: flex;
+    gap: 2.5rem;
+    width: max-content;
     padding: 1rem 0;
-    animation: ticker 22s linear infinite;
+    animation: ticker 20s linear infinite;
 }
 
 .brand-track span {
     font-family: "Syne", sans-serif;
     font-size: 1.1rem;
     white-space: nowrap;
+}
+
+.brand-track span::after {
+    content: "//";
+    margin-left: 2.5rem;
+    opacity: 0.7;
 }
 
 .section-block {
@@ -547,16 +628,6 @@ a {
 
 .section-heading h2 {
     font-size: clamp(2rem, 4vw, 3.4rem);
-}
-
-.section-heading p,
-.catalog-summary p,
-.collection-copy p,
-.spotlight-copy p,
-.spotlight-note p,
-.edit-card p,
-.tab-panel p {
-    color: var(--muted);
 }
 
 .catalog-toolbar {
@@ -603,14 +674,20 @@ a {
     background: rgba(255, 255, 255, 0.58);
     border-radius: 1.3rem;
     overflow: hidden;
-    transition: transform 200ms ease, box-shadow 200ms ease;
+    transition: transform 220ms ease, box-shadow 220ms ease;
+}
+
+.collection-card:hover,
+.edit-card:hover,
+.spotlight-card:hover {
+    box-shadow: var(--shadow);
 }
 
 .collection-card img {
     aspect-ratio: 4 / 4.8;
     object-fit: cover;
     background-color: rgba(19, 19, 19, 0.08);
-    transition: transform 500ms ease, opacity 250ms ease;
+    transition: transform 520ms ease;
 }
 
 .collection-orange {
@@ -755,7 +832,7 @@ a {
     border-radius: 1.3rem;
     background-color: rgba(19, 19, 19, 0.08);
     object-fit: cover;
-    transition: transform 500ms ease, opacity 250ms ease;
+    transition: transform 520ms ease;
 }
 
 .style-tabs {
@@ -833,7 +910,7 @@ a {
     padding: 1.4rem;
     border-radius: 1.3rem;
     background: rgba(255, 255, 255, 0.58);
-    transition: transform 200ms ease, box-shadow 200ms ease;
+    transition: transform 220ms ease, box-shadow 220ms ease;
 }
 
 .edit-card p {
@@ -842,8 +919,8 @@ a {
 
 .reveal {
     opacity: 0;
-    transform: translateY(18px);
-    transition: opacity 500ms ease, transform 500ms ease;
+    transform: translateY(26px);
+    transition: opacity 650ms ease, transform 650ms ease;
 }
 
 .reveal.is-visible {
@@ -871,6 +948,16 @@ a {
     }
 }
 
+@keyframes float-card {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
 @media (max-width: 1280px) {
     .collection-grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -882,26 +969,30 @@ a {
 }
 
 @media (max-width: 1100px) {
-    .collection-grid,
-    .edit-grid,
-    .style-tabs {
+    .hero-grid,
+    .viewer-header,
+    .style-tabs,
+    .edit-grid {
         grid-template-columns: 1fr;
     }
 
-    .hero-copy {
-        left: 2rem;
-        bottom: 5.5rem;
-        width: calc(100% - 4rem);
+    .hero-visual {
+        min-height: auto;
+        grid-template-columns: 1fr 1fr;
     }
 
-    .hero-copy h1 {
-        font-size: clamp(2.8rem, 8vw, 5rem);
+    .feature-primary,
+    .feature-secondary {
+        min-height: 440px;
+        margin-top: 0;
     }
 
-    .hero-controls {
-        left: 2rem;
-        right: auto;
-        bottom: 1.5rem;
+    .floating-note {
+        right: 1rem;
+    }
+
+    .viewer-stage {
+        min-height: 920px;
     }
 
     .catalog-toolbar,
@@ -916,18 +1007,23 @@ a {
         grid-column: auto;
     }
 
-    .collection-grid,
-    .hero-entry-grid {
+    .collection-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
 
 @media (max-width: 820px) {
-    .hero-slider {
-        min-height: 660px;
+    .viewer-stage {
+        min-height: 980px;
     }
 
-    .hero-entry-grid,
+    .viewer-panel-controls {
+        right: 1rem;
+        left: 1rem;
+        width: auto;
+        bottom: 1rem;
+    }
+
     .spotlight-card {
         grid-template-columns: 1fr;
     }
@@ -943,7 +1039,8 @@ a {
 
 @media (max-width: 760px) {
     .hero,
-    .section-block {
+    .section-block,
+    .viewer-showcase {
         padding-left: 1rem;
         padding-right: 1rem;
     }
@@ -958,56 +1055,62 @@ a {
         gap: 0.8rem;
     }
 
-    .hero-stage {
-        border-radius: 1.5rem;
-    }
-
-    .hero-slider {
-        min-height: 640px;
-    }
-
-    .hero-copy {
-        left: 1.2rem;
-        bottom: 6rem;
-        width: calc(100% - 2.4rem);
+    .hero-grid {
+        margin-top: 2rem;
+        gap: 1.5rem;
     }
 
     .hero-copy h1 {
         max-width: none;
-        font-size: clamp(2.5rem, 14vw, 4.2rem);
+        font-size: clamp(2.6rem, 14vw, 4.2rem);
     }
 
-    .hero-inline-stats,
-    .collection-grid,
-    .edit-grid {
+    .hero-stats {
         grid-template-columns: 1fr;
     }
 
-    .hero-inline-stats {
-        flex-direction: column;
+    .hero-visual {
+        grid-template-columns: 1fr;
     }
 
-    .hero-controls {
-        left: 1.2rem;
-        right: 1.2rem;
-        bottom: 1.2rem;
-        justify-content: space-between;
-        flex-wrap: nowrap;
+    .feature-primary,
+    .feature-secondary {
+        min-height: 380px;
     }
 
-    .hero-arrow {
-        min-width: 4.2rem;
-        padding: 0.7rem 0.8rem;
+    .floating-note {
+        position: static;
+        width: 100%;
     }
 
-    .hero-dot {
-        min-width: 2.8rem;
+    .viewer-header {
+        margin-bottom: 1rem;
+    }
+
+    .viewer-stage {
+        min-height: 900px;
+    }
+
+    .viewer-panel-copy {
+        top: 1rem;
+        left: 1rem;
+        right: 1rem;
+        width: auto;
+    }
+
+    .collection-grid,
+    .edit-grid {
+        gap: 1rem;
+    }
+
+    .tabs {
+        margin-bottom: 0.4rem;
     }
 
     .collection-copy h3,
     .edit-card h3,
     .tab-panel h3,
-    .hero-entry-copy h2 {
+    .viewer-meta-panel h3 {
         font-size: 1.35rem;
     }
 }

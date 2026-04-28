@@ -2,67 +2,50 @@ from django.shortcuts import render
 
 
 def home(request):
-    promo_items = [
-        "Fresh campus drops live now",
-        "Express delivery in major cities",
-        "Mens and womens oversized fits",
-        "New graphic edits every week",
-    ]
-
-    hero_slides = [
+    hero_features = [
         {
-            "eyebrow": "Drop 01",
-            "title": "Streetwear built for loud fits and fast scroll stops.",
-            "description": "Graphic-heavy layers, washed neutrals, and oversized silhouettes shaped into a bold opening statement.",
-            "image": "https://images.unsplash.com/photo-1523398002811-999ca8dec234?auto=format&fit=crop&fm=jpg&q=80&w=1600",
-            "tone": "ember",
-            "primary_label": "Shop new arrivals",
-            "secondary_label": "Explore catalog",
-        },
-        {
-            "eyebrow": "Drop 02",
-            "title": "Mens edits with varsity texture, cargos, and clean edge.",
-            "description": "A stronger mens first-view with sharper layering and a fashion-led hero that feels more like a brand campaign.",
-            "image": "https://images.unsplash.com/photo-1771919371651-04d6ec4c239a?auto=format&fit=crop&fm=jpg&q=80&w=1600",
-            "tone": "night",
-            "primary_label": "Shop mens",
-            "secondary_label": "See fit ideas",
-        },
-        {
-            "eyebrow": "Drop 03",
-            "title": "Womens color stories with co-ords, mesh, and after-dark shine.",
-            "description": "Stronger womens placement, brighter styling, and a more cinematic landing experience from the first screen.",
-            "image": "https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&fm=jpg&q=80&w=1600",
-            "tone": "aqua",
-            "primary_label": "Shop womens",
-            "secondary_label": "View spotlight",
-        },
-    ]
-
-    hero_entries = [
-        {
-            "label": "Mens",
+            "label": "Mens drop",
             "title": "Oversized layers",
             "copy": "Varsity zips, cargos, washed denim",
             "image": "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&fm=jpg&q=80&w=900",
-            "href": "#gender-edits",
             "tone": "orange",
         },
         {
-            "label": "Womens",
-            "title": "Color-led co-ords",
+            "label": "Womens drop",
+            "title": "After-dark color",
             "copy": "Sharp silhouettes with mirror-ready energy",
             "image": "https://images.unsplash.com/photo-1761167474127-1c6e596ecea6?auto=format&fit=crop&fm=jpg&q=80&w=900",
-            "href": "#gender-edits",
             "tone": "teal",
         },
+    ]
+
+    hero_note = {
+        "label": "New capsule",
+        "title": "Campus to concert",
+        "copy": "Utility denim, graphic hoodies, and low-effort statement styling with added motion and a real 360 viewer.",
+    }
+
+    viewer_presets = [
         {
-            "label": "New In",
-            "title": "This week only",
-            "copy": "Fresh drops and quick-shop category picks",
-            "image": "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&fm=jpg&q=80&w=900",
-            "href": "#collections",
-            "tone": "yellow",
+            "id": "mens",
+            "label": "Mens fit",
+            "title": "Utility stacked look",
+            "description": "Oversized outerwear, relaxed cargos, and grounded sneakers for a sharp everyday silhouette.",
+            "chips": ["Oversized jacket", "Stacked cargos", "Street sneakers"],
+        },
+        {
+            "id": "womens",
+            "label": "Womens fit",
+            "title": "Color-led mirror look",
+            "description": "Cropped jacket proportions, wide-leg balance, and cleaner accent tones built for styled photo moments.",
+            "chips": ["Cropped layer", "Wide-leg drape", "Gloss accents"],
+        },
+        {
+            "id": "unisex",
+            "label": "Unisex fit",
+            "title": "Soft motion hoodie edit",
+            "description": "A comfort-first hoodie and cargo mix that still reads styled from every side of the turntable.",
+            "chips": ["Soft hoodie", "Neutral cargo", "Bold strap detail"],
         },
     ]
 
@@ -240,9 +223,9 @@ def home(request):
     ]
 
     context = {
-        "promo_items": promo_items,
-        "hero_slides": hero_slides,
-        "hero_entries": hero_entries,
+        "hero_features": hero_features,
+        "hero_note": hero_note,
+        "viewer_presets": viewer_presets,
         "collections": collections,
         "featured_lines": featured_lines,
         "categories": categories,

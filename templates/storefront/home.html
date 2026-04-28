@@ -12,100 +12,119 @@
 </head>
 <body>
     <div class="page-shell">
-        <section class="promo-strip" aria-label="Brand promotions">
-            <div class="promo-track">
-                {% for item in promo_items %}
-                    <span>{{ item }}</span>
-                {% endfor %}
-                {% for item in promo_items %}
-                    <span>{{ item }}</span>
-                {% endfor %}
-            </div>
-        </section>
-
         <header class="hero">
-            <nav class="topbar topbar-hero">
+            <nav class="topbar">
                 <a class="brand-mark" href="/">THREADLY</a>
                 <div class="topbar-links">
-                    <a href="#collections">New In</a>
-                    <a href="#gender-edits">Mens + Womens</a>
-                    <a href="#style-tabs">Categories</a>
                     <a href="#collections">Collections</a>
+                    <a href="#gender-edits">Mens + Womens</a>
+                    <a href="#style-tabs">Style Tabs</a>
                     <a href="#edits">Best Design Picks</a>
                 </div>
             </nav>
 
-            <div class="hero-stage">
-                <div class="hero-slider">
-                    {% for slide in hero_slides %}
-                        <article class="hero-slide hero-tone-{{ slide.tone }}{% if forloop.first %} active{% endif %}" data-hero-slide>
-                            <img src="{{ slide.image }}" alt="{{ slide.title }}">
-                            <div class="hero-overlay"></div>
-                            <div class="hero-copy">
-                                <p class="eyebrow">{{ slide.eyebrow }}</p>
-                                <h1>{{ slide.title }}</h1>
-                                <p class="hero-text">{{ slide.description }}</p>
-                                <div class="hero-actions">
-                                    <a class="button primary" href="#collections">{{ slide.primary_label }}</a>
-                                    <a class="button secondary" href="#style-tabs">{{ slide.secondary_label }}</a>
-                                    <a class="button ghost" href="#gender-edits">Mens and womens</a>
-                                </div>
-                                <div class="hero-pills">
-                                    {% for pill in shop_pills %}
-                                        <span>{{ pill }}</span>
-                                    {% endfor %}
-                                </div>
-                                <div class="hero-inline-stats">
-                                    <div>
-                                        <strong>140+</strong>
-                                        <span>fresh weekly pieces</span>
-                                    </div>
-                                    <div>
-                                        <strong>24 hr</strong>
-                                        <span>fast metro dispatch</span>
-                                    </div>
-                                    <div>
-                                        <strong>2 edits</strong>
-                                        <span>mens and womens focus</span>
-                                    </div>
-                                </div>
+            <div class="hero-grid">
+                <section class="hero-copy reveal hero-copy-main">
+                    <p class="eyebrow">GEN Z STREET + SOCIAL STYLE</p>
+                    <h1>Fits that look loud, feel easy, and move from class to after-hours.</h1>
+                    <p class="hero-text">
+                        A trend-first clothing brand for mens and womens wardrobes, blending oversized streetwear,
+                        clean staples, and standout edits with a new 360 outfit viewer for closer inspection.
+                    </p>
+                    <div class="hero-actions">
+                        <a class="button primary" href="#collections">Shop the drops</a>
+                        <a class="button secondary" href="#gender-edits">Mens and womens</a>
+                        <a class="button ghost" href="#look-viewer">360 viewer</a>
+                    </div>
+                    <div class="hero-pills">
+                        {% for pill in shop_pills %}
+                            <span>{{ pill }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="hero-stats">
+                        <div class="reveal">
+                            <span>140+</span>
+                            <p>fresh weekly pieces</p>
+                        </div>
+                        <div class="reveal">
+                            <span>24 hr</span>
+                            <p>fast metro dispatch</p>
+                        </div>
+                        <div class="reveal">
+                            <span>360 view</span>
+                            <p>see outfits from every angle</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="hero-visual reveal">
+                    {% for feature in hero_features %}
+                        <article class="feature-card feature-{% if forloop.first %}primary{% else %}secondary{% endif %} feature-{{ feature.tone }} tilt-card" data-tilt-card>
+                            <img src="{{ feature.image }}" alt="{{ feature.title }}">
+                            <div class="feature-overlay">
+                                <p>{{ feature.label }}</p>
+                                <h2>{{ feature.title }}</h2>
+                                <span>{{ feature.copy }}</span>
                             </div>
                         </article>
                     {% endfor %}
-                </div>
+                    <aside class="floating-note reveal">
+                        <span>{{ hero_note.label }}</span>
+                        <strong>{{ hero_note.title }}</strong>
+                        <p>{{ hero_note.copy }}</p>
+                    </aside>
+                </section>
+            </div>
+        </header>
 
-                <div class="hero-controls">
-                    <button class="hero-arrow" type="button" data-hero-prev aria-label="Previous hero slide">Prev</button>
-                    <div class="hero-dots" aria-label="Hero slides">
-                        {% for slide in hero_slides %}
+        <section class="viewer-showcase" id="look-viewer">
+            <div class="viewer-header reveal">
+                <div>
+                    <p class="eyebrow">360 LOOK VIEWER</p>
+                    <h2>Rotate the outfit and inspect the clothes from every angle.</h2>
+                </div>
+                <p class="viewer-intro">
+                    Drag the model to turn it around, switch between mens, womens, and unisex looks, and check how the silhouette and layering hold up from all sides.
+                </p>
+            </div>
+
+            <div class="viewer-stage">
+                <div class="viewer-canvas" data-look-viewer aria-label="Interactive 3D outfit viewer"></div>
+                <div class="viewer-panel viewer-panel-copy reveal">
+                    <span>Threadly 360 lab</span>
+                    <strong>Drag to rotate 360 degrees</strong>
+                    <p>Orbit around the outfit to inspect the jacket, sleeves, trouser volume, and accessory placement.</p>
+                </div>
+                <div class="viewer-panel viewer-panel-controls reveal">
+                    <div class="viewer-options" role="tablist" aria-label="3D outfit presets">
+                        {% for preset in viewer_presets %}
                             <button
-                                class="hero-dot{% if forloop.first %} active{% endif %}"
+                                class="viewer-option{% if forloop.first %} active{% endif %}"
                                 type="button"
-                                data-hero-dot="{{ forloop.counter0 }}"
-                                aria-label="Go to slide {{ forloop.counter }}"
+                                data-look-option="{{ preset.id }}"
+                                aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
                             >
-                                0{{ forloop.counter }}
+                                {{ preset.label }}
                             </button>
                         {% endfor %}
                     </div>
-                    <button class="hero-arrow" type="button" data-hero-next aria-label="Next hero slide">Next</button>
+
+                    <div class="viewer-meta">
+                        {% for preset in viewer_presets %}
+                            <article class="viewer-meta-panel{% if forloop.first %} active{% endif %}" data-look-panel="{{ preset.id }}">
+                                <h3>{{ preset.title }}</h3>
+                                <p>{{ preset.description }}</p>
+                                <div class="viewer-chip-row">
+                                    {% for chip in preset.chips %}
+                                        <span>{{ chip }}</span>
+                                    {% endfor %}
+                                </div>
+                            </article>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
-
-            <div class="hero-entry-grid">
-                {% for entry in hero_entries %}
-                    <a class="hero-entry hero-entry-{{ entry.tone }} reveal" href="{{ entry.href }}">
-                        <img src="{{ entry.image }}" alt="{{ entry.label }}">
-                        <div class="hero-entry-overlay"></div>
-                        <div class="hero-entry-copy">
-                            <span>{{ entry.label }}</span>
-                            <h2>{{ entry.title }}</h2>
-                            <p>{{ entry.copy }}</p>
-                        </div>
-                    </a>
-                {% endfor %}
-            </div>
-        </header>
+        </section>
 
         <section class="brand-strip" aria-label="Featured brands">
             <div class="brand-track">
@@ -142,7 +161,7 @@
                 </div>
                 <div class="collection-grid">
                     {% for item in collections %}
-                        <article class="collection-card collection-{{ item.mood }} reveal">
+                        <article class="collection-card collection-{{ item.mood }} reveal tilt-card" data-tilt-card>
                             <img src="{{ item.image }}" alt="{{ item.name }}">
                             <div class="collection-copy">
                                 <div class="collection-meta">
@@ -172,7 +191,7 @@
                 </div>
                 <div class="spotlight-grid">
                     {% for spotlight in spotlights %}
-                        <article class="spotlight-card spotlight-{{ spotlight.slug }} reveal">
+                        <article class="spotlight-card spotlight-{{ spotlight.slug }} reveal tilt-card" data-tilt-card>
                             <div class="spotlight-copy">
                                 <p class="eyebrow">{{ spotlight.label }}</p>
                                 <h3>{{ spotlight.title }}</h3>
@@ -255,7 +274,7 @@
                 </div>
                 <div class="edit-grid">
                     {% for line in featured_lines %}
-                        <article class="edit-card reveal">
+                        <article class="edit-card reveal tilt-card" data-tilt-card>
                             <span class="edit-badge">{{ line.badge }}</span>
                             <h3>{{ line.title }}</h3>
                             <p>{{ line.copy }}</p>
@@ -267,6 +286,6 @@
         </main>
     </div>
 
-    <script src="{% static 'storefront/js/site.js' %}"></script>
+    <script type="module" src="{% static 'storefront/js/site.js' %}"></script>
 </body>
 </html>
