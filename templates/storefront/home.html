@@ -1,0 +1,272 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Threadly | Gen Z Fashion</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'storefront/css/site.css' %}">
+</head>
+<body>
+    <div class="page-shell">
+        <section class="promo-strip" aria-label="Brand promotions">
+            <div class="promo-track">
+                {% for item in promo_items %}
+                    <span>{{ item }}</span>
+                {% endfor %}
+                {% for item in promo_items %}
+                    <span>{{ item }}</span>
+                {% endfor %}
+            </div>
+        </section>
+
+        <header class="hero">
+            <nav class="topbar topbar-hero">
+                <a class="brand-mark" href="/">THREADLY</a>
+                <div class="topbar-links">
+                    <a href="#collections">New In</a>
+                    <a href="#gender-edits">Mens + Womens</a>
+                    <a href="#style-tabs">Categories</a>
+                    <a href="#collections">Collections</a>
+                    <a href="#edits">Best Design Picks</a>
+                </div>
+            </nav>
+
+            <div class="hero-stage">
+                <div class="hero-slider">
+                    {% for slide in hero_slides %}
+                        <article class="hero-slide hero-tone-{{ slide.tone }}{% if forloop.first %} active{% endif %}" data-hero-slide>
+                            <img src="{{ slide.image }}" alt="{{ slide.title }}">
+                            <div class="hero-overlay"></div>
+                            <div class="hero-copy">
+                                <p class="eyebrow">{{ slide.eyebrow }}</p>
+                                <h1>{{ slide.title }}</h1>
+                                <p class="hero-text">{{ slide.description }}</p>
+                                <div class="hero-actions">
+                                    <a class="button primary" href="#collections">{{ slide.primary_label }}</a>
+                                    <a class="button secondary" href="#style-tabs">{{ slide.secondary_label }}</a>
+                                    <a class="button ghost" href="#gender-edits">Mens and womens</a>
+                                </div>
+                                <div class="hero-pills">
+                                    {% for pill in shop_pills %}
+                                        <span>{{ pill }}</span>
+                                    {% endfor %}
+                                </div>
+                                <div class="hero-inline-stats">
+                                    <div>
+                                        <strong>140+</strong>
+                                        <span>fresh weekly pieces</span>
+                                    </div>
+                                    <div>
+                                        <strong>24 hr</strong>
+                                        <span>fast metro dispatch</span>
+                                    </div>
+                                    <div>
+                                        <strong>2 edits</strong>
+                                        <span>mens and womens focus</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    {% endfor %}
+                </div>
+
+                <div class="hero-controls">
+                    <button class="hero-arrow" type="button" data-hero-prev aria-label="Previous hero slide">Prev</button>
+                    <div class="hero-dots" aria-label="Hero slides">
+                        {% for slide in hero_slides %}
+                            <button
+                                class="hero-dot{% if forloop.first %} active{% endif %}"
+                                type="button"
+                                data-hero-dot="{{ forloop.counter0 }}"
+                                aria-label="Go to slide {{ forloop.counter }}"
+                            >
+                                0{{ forloop.counter }}
+                            </button>
+                        {% endfor %}
+                    </div>
+                    <button class="hero-arrow" type="button" data-hero-next aria-label="Next hero slide">Next</button>
+                </div>
+            </div>
+
+            <div class="hero-entry-grid">
+                {% for entry in hero_entries %}
+                    <a class="hero-entry hero-entry-{{ entry.tone }} reveal" href="{{ entry.href }}">
+                        <img src="{{ entry.image }}" alt="{{ entry.label }}">
+                        <div class="hero-entry-overlay"></div>
+                        <div class="hero-entry-copy">
+                            <span>{{ entry.label }}</span>
+                            <h2>{{ entry.title }}</h2>
+                            <p>{{ entry.copy }}</p>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+        </header>
+
+        <section class="brand-strip" aria-label="Featured brands">
+            <div class="brand-track">
+                {% for brand in brands %}
+                    <span>{{ brand }}</span>
+                {% endfor %}
+                {% for brand in brands %}
+                    <span>{{ brand }}</span>
+                {% endfor %}
+            </div>
+        </section>
+
+        <main>
+            <section class="section-block collections" id="collections">
+                <div class="section-heading">
+                    <p class="eyebrow">TRENDING NOW</p>
+                    <h2>Best design collections with real outfit energy.</h2>
+                    <p>Built to feel editorial up close and wearable every day, with separate moods for mens, womens, and easy unisex styling.</p>
+                </div>
+                <div class="catalog-toolbar reveal">
+                    <div class="catalog-summary">
+                        <strong>8 spotlight products live</strong>
+                        <p>More variety, more quick actions, and a cleaner shop-first layout for browsing.</p>
+                    </div>
+                    <div class="catalog-actions">
+                        <a class="button secondary compact" href="#gender-edits">Browse mens and womens</a>
+                        <a class="button primary compact" href="#style-tabs">Open style catalog</a>
+                    </div>
+                </div>
+                <div class="shop-pill-row reveal" aria-label="Catalog tags">
+                    {% for pill in shop_pills %}
+                        <a href="#collections">{{ pill }}</a>
+                    {% endfor %}
+                </div>
+                <div class="collection-grid">
+                    {% for item in collections %}
+                        <article class="collection-card collection-{{ item.mood }} reveal">
+                            <img src="{{ item.image }}" alt="{{ item.name }}">
+                            <div class="collection-copy">
+                                <div class="collection-meta">
+                                    <span>{{ item.tag }}</span>
+                                    <strong>{{ item.price }}</strong>
+                                </div>
+                                <h3>{{ item.name }}</h3>
+                                <p>{{ item.accent }}</p>
+                                <div class="collection-footer">
+                                    <span class="collection-badge">{{ item.badge }}</span>
+                                    <div class="card-actions">
+                                        <a class="mini-button dark" href="#style-tabs">Quick shop</a>
+                                        <a class="mini-button light" href="#edits">Style it</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    {% endfor %}
+                </div>
+            </section>
+
+            <section class="section-block gender-edits" id="gender-edits">
+                <div class="section-heading">
+                    <p class="eyebrow">MENS + WOMENS SPOTLIGHT</p>
+                    <h2>Give both sections their own visual weight.</h2>
+                    <p>The homepage now highlights mens and womens edits separately so each audience gets a stronger first impression and an easier path into the catalog.</p>
+                </div>
+                <div class="spotlight-grid">
+                    {% for spotlight in spotlights %}
+                        <article class="spotlight-card spotlight-{{ spotlight.slug }} reveal">
+                            <div class="spotlight-copy">
+                                <p class="eyebrow">{{ spotlight.label }}</p>
+                                <h3>{{ spotlight.title }}</h3>
+                                <p>{{ spotlight.description }}</p>
+                                <div class="spotlight-tags">
+                                    {% for item in spotlight.highlights %}
+                                        <span>{{ item }}</span>
+                                    {% endfor %}
+                                </div>
+                                <div class="spotlight-meta">
+                                    <div>
+                                        <strong>{{ spotlight.stat }}</strong>
+                                        <p>{{ spotlight.substat }}</p>
+                                    </div>
+                                    <div class="spotlight-note">
+                                        <span>Inside this drop</span>
+                                        <p>{{ spotlight.note }}</p>
+                                    </div>
+                                </div>
+                                <div class="spotlight-actions">
+                                    <a class="button primary" href="#collections">Shop {{ spotlight.shop_label }}</a>
+                                    <a class="button secondary" href="#style-tabs">View fit ideas</a>
+                                </div>
+                            </div>
+                            <div class="spotlight-media">
+                                <img src="{{ spotlight.image }}" alt="{{ spotlight.label }}">
+                            </div>
+                        </article>
+                    {% endfor %}
+                </div>
+            </section>
+
+            <section class="section-block style-tabs" id="style-tabs">
+                <div class="section-heading">
+                    <p class="eyebrow">STYLE MODES</p>
+                    <h2>Switch between the vibe boards.</h2>
+                    <p>Each tab highlights a different shopping mood so the homepage feels like a real brand edit, not just a static banner.</p>
+                </div>
+
+                <div class="tabs" role="tablist" aria-label="Style categories">
+                    {% for category in categories %}
+                        <button
+                            class="tab-button{% if forloop.first %} active{% endif %}"
+                            type="button"
+                            role="tab"
+                            aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+                            data-tab="{{ category.slug }}"
+                        >
+                            {{ category.label }}
+                        </button>
+                    {% endfor %}
+                </div>
+
+                <div class="tab-panels">
+                    {% for category in categories %}
+                        <article class="tab-panel{% if forloop.first %} active{% endif %}" data-panel="{{ category.slug }}">
+                            <p class="eyebrow">{{ category.eyebrow }}</p>
+                            <h3>{{ category.title }}</h3>
+                            <p>{{ category.description }}</p>
+                            <div class="chip-row">
+                                {% for highlight in category.highlights %}
+                                    <span>{{ highlight }}</span>
+                                {% endfor %}
+                            </div>
+                            <div class="panel-footer">
+                                <strong>{{ category.count }}</strong>
+                                <div class="panel-actions">
+                                    <a class="mini-button dark" href="#collections">{{ category.cta }}</a>
+                                </div>
+                            </div>
+                        </article>
+                    {% endfor %}
+                </div>
+            </section>
+
+            <section class="section-block edits" id="edits">
+                <div class="section-heading">
+                    <p class="eyebrow">EDITOR PICKS</p>
+                    <h2>Three ready-made fashion stories for the season.</h2>
+                </div>
+                <div class="edit-grid">
+                    {% for line in featured_lines %}
+                        <article class="edit-card reveal">
+                            <span class="edit-badge">{{ line.badge }}</span>
+                            <h3>{{ line.title }}</h3>
+                            <p>{{ line.copy }}</p>
+                            <a class="mini-button dark" href="#collections">Shop this story</a>
+                        </article>
+                    {% endfor %}
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="{% static 'storefront/js/site.js' %}"></script>
+</body>
+</html>
