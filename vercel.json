@@ -1,7 +1,18 @@
 {
-  "buildCommand": "python manage.py collectstatic --noinput",
-  "outputDirectory": "staticfiles",
-  "installCommand": "pip install -r requirements.txt",
-  "framework": "django",
-  "pythonVersion": "3.12"
+  "builds": [
+    {
+      "src": "genzstyle/wsgi.py",
+      "use": "@vercel/python",
+      "config": {
+        "maxLambdaSize": "15mb",
+        "runtime": "python3.12"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "genzstyle/wsgi.py"
+    }
+  ]
 }
